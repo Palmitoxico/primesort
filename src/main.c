@@ -2,7 +2,7 @@
  * Primesort
  */
 #include <stdio.h>
-#include <stdint.h>
+#include <inttypes.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -42,13 +42,13 @@ int main()
 
 	close(sort_pipe[0]);
 
-	while (scanf("%ld\n", &num) != EOF)
+	while (scanf("%l" PRIu64 "\n", &num) != EOF)
 	{
 		if (num < 0) break;
 		if (!isPrime(num))
 		{
 			char strnum[16];
-			int strsize = snprintf(strnum, sizeof(strnum), "%ld\n", num);
+			int strsize = snprintf(strnum, sizeof(strnum), "%l" PRIu64 "\n", num);
 			write(sort_pipe[1], strnum, strsize);
 		}
 	}
